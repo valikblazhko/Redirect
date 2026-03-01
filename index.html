@@ -1,16 +1,85 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="uk">
+<head>
     <meta charset="utf-8" />
-    <title>Redirect</title>
-  </head>
-  <body>
-    <p>Redirecting back to the app...</p>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN Redirect</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f7f9;
+            color: #333;
+            text-align: center;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 350px;
+        }
+        h2 { margin-bottom: 1rem; font-size: 1.2rem; }
+        p { color: #666; margin-bottom: 2rem; }
+        
+        .btn {
+            display: inline-block;
+            background-color: #007AFF;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn:active {
+            background-color: #0056b3;
+        }
+        #timer { font-weight: bold; color: #007AFF; }
+    </style>
+</head>
+<body>
 
-    <script>
-      setTimeout(function () {
-        window.location.href = "app://vpn.australia_tap2free?manual=﻿﻿﻿aHR0cHM6Ly9tYW51YWxzZXR0aW5ncy50b3AvYXBpLw==";
-      }, 3000);
-    </script>
-  </body>
+<div class="card">
+    <h2>Повернення в додаток</h2>
+    <p>Ви будете перенаправлені автоматично через <span id="timer">3</span> сек...</p>
+    
+    <a href="app://vpn.australia_tap2free?manual=aHR0cHM6Ly9tYW51YWxzZXR0aW5ncy50b3AvYXBpLw==" class="btn">
+        ВІДКРИТИ ДОДАТОК ЗАРАЗ
+    </a>
+</div>
+
+<script>
+    var targetUrl = "app://vpn.australia_tap2free?manual=aHR0cHM6Ly9tYW51YWxzZXR0aW5ncy50b3AvYXBpLw==";
+    var seconds = 3;
+    var timerDisplay = document.getElementById('timer');
+
+    // Логіка таймера
+    var countdown = setInterval(function() {
+        seconds--;
+        timerDisplay.textContent = seconds;
+        if (seconds <= 0) {
+            clearInterval(countdown);
+            window.location.href = targetUrl;
+        }
+    }, 1000);
+
+    // Спроба миттєвого редіректу (опціонально)
+    // Деякі браузери дозволяють це одразу, інші - тільки після кліку
+    setTimeout(function () {
+        window.location.href = targetUrl;
+    }, 3000);
+</script>
+
+</body>
 </html>
